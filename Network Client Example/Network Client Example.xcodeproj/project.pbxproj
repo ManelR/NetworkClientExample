@@ -76,6 +76,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A993AA129F2DAF400ED56B7 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8AD5E2B729F2D78E007687B8 /* AppDelegate.swift */,
+				8AD5E2B929F2D78E007687B8 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8A993AA229F2DAFE00ED56B7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8A993AA329F2DB0E00ED56B7 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8A993AA429F2DB2E00ED56B7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8AD5E2BB29F2D78E007687B8 /* ViewController.swift */,
+				8AD5E2BD29F2D78E007687B8 /* Main.storyboard */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8A993AA529F2DB3800ED56B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8AD5E2C029F2D78F007687B8 /* Assets.xcassets */,
+				8AD5E2C229F2D78F007687B8 /* LaunchScreen.storyboard */,
+				8AD5E2C529F2D78F007687B8 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8AD5E2AB29F2D78E007687B8 = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +141,11 @@
 		8AD5E2B629F2D78E007687B8 /* Network Client Example */ = {
 			isa = PBXGroup;
 			children = (
-				8AD5E2B729F2D78E007687B8 /* AppDelegate.swift */,
-				8AD5E2B929F2D78E007687B8 /* SceneDelegate.swift */,
-				8AD5E2BB29F2D78E007687B8 /* ViewController.swift */,
-				8AD5E2BD29F2D78E007687B8 /* Main.storyboard */,
-				8AD5E2C029F2D78F007687B8 /* Assets.xcassets */,
-				8AD5E2C229F2D78F007687B8 /* LaunchScreen.storyboard */,
-				8AD5E2C529F2D78F007687B8 /* Info.plist */,
+				8A993AA129F2DAF400ED56B7 /* Application */,
+				8A993AA229F2DAFE00ED56B7 /* Data */,
+				8A993AA329F2DB0E00ED56B7 /* Domain */,
+				8A993AA429F2DB2E00ED56B7 /* Presentation */,
+				8A993AA529F2DB3800ED56B7 /* Resources */,
 			);
 			path = "Network Client Example";
 			sourceTree = "<group>";
@@ -438,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Network Client Example/Info.plist";
+				INFOPLIST_FILE = "Network Client Example/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -465,7 +505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Network Client Example/Info.plist";
+				INFOPLIST_FILE = "Network Client Example/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
