@@ -15,43 +15,13 @@ class HTTPClient: HTTPClientType {
     }
     
     func send(request: URLRequest) async throws -> Data? {
+        var result:(data: Data?, response: URLResponse?)
         do {
-            var result:(data: Data?, response: URLResponse?)
             if #available(iOS 15.0, *) {
                 result = try await self.makeRequest(request: request)
             } else {
                 result = try await self.makeRequestUnderiOS15(request: request)
             }
-            
-            let status = (result.response as? HTTPURLResponse)?.statusCode ?? 0
-            
-            if let httpResponse = result.response as? HTTPURLResponse,
-               let date = httpResponse.value(forHTTPHeaderField: "Date") {
-                print("\(getName()): RESPONSE \(status) - DATE: \(date)")
-            }
-            
-            if let data = result.data {
-                let body = String(decoding: data, as: UTF8.self)
-                print("\(getName()): RESPONSE \(status) - BODY: \(body)")
-            }
-            
-            guard let httpResponse = result.response as? HTTPURLResponse,
-                  (200..<300) ~= httpResponse.statusCode else {
-                      switch status {
-                      case 401, 403:
-                          // Auth error
-                          throw HTTPError.authenticationError
-                      case 404:
-                          throw HTTPError.notFound
-                      case 409:
-                          throw HTTPError.conflict
-                      default:
-                          // Server error
-                          throw HTTPError.serverError
-                      }
-            }
-            
-            return result.data
         } catch {
             if let error = error as NSError?, error.domain == NSURLErrorDomain {
                 if error.code == NSURLErrorNotConnectedToInternet {
@@ -62,6 +32,37 @@ class HTTPClient: HTTPClientType {
             }
             throw HTTPError.clientError
         }
+        
+        
+        let status = (result.response as? HTTPURLResponse)?.statusCode ?? 0
+        
+        if let httpResponse = result.response as? HTTPURLResponse,
+           let date = httpResponse.value(forHTTPHeaderField: "Date") {
+            print("\(getName()): RESPONSE \(status) - DATE: \(date)")
+        }
+        
+        if let data = result.data {
+            let body = String(decoding: data, as: UTF8.self)
+            print("\(getName()): RESPONSE \(status) - BODY: \(body)")
+        }
+        
+        guard let httpResponse = result.response as? HTTPURLResponse,
+              (200..<300) ~= httpResponse.statusCode else {
+                  switch status {
+                  case 401, 403:
+                      // Auth error
+                      throw HTTPError.authenticationError
+                  case 404:
+                      throw HTTPError.notFound
+                  case 409:
+                      throw HTTPError.conflict
+                  default:
+                      // Server error
+                      throw HTTPError.serverError
+                  }
+        }
+        
+        return result.data
     }
 }
 
