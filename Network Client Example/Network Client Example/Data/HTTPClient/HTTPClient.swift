@@ -1,0 +1,91 @@
+//
+//  HTTPClient.swift
+//  Network Client Example
+//
+//  Created by Manel Roca on 21/4/23.
+//
+
+import Foundation
+
+class HTTPClient: HTTPClientType {
+    internal var session: URLSession
+    
+    init(session: URLSession) {
+        self.session = session
+    }
+    
+    func send(request: URLRequest) async throws -> Data? {
+        do {
+            var result:(data: Data?, response: URLResponse?)
+            if #available(iOS 15.0, *) {
+                result = try await self.makeRequest(request: request)
+            } else {
+                result = try await self.makeRequestUnderiOS15(request: request)
+            }
+            
+            let status = (result.response as? HTTPURLResponse)?.statusCode ?? 0
+            
+            if let httpResponse = result.response as? HTTPURLResponse,
+               let date = httpResponse.value(forHTTPHeaderField: "Date") {
+                print("\(getName()): RESPONSE \(status) - DATE: \(date)")
+            }
+            
+            if let data = result.data {
+                let body = String(decoding: data, as: UTF8.self)
+                print("\(getName()): RESPONSE \(status) - BODY: \(body)")
+            }
+            
+            guard let httpResponse = result.response as? HTTPURLResponse,
+                  (200..<300) ~= httpResponse.statusCode else {
+                      switch status {
+                      case 401, 403:
+                          // Auth error
+                          throw HTTPError.authenticationError
+                      case 404:
+                          throw HTTPError.notFound
+                      case 409:
+                          throw HTTPError.conflict
+                      default:
+                          // Server error
+                          throw HTTPError.serverError
+                      }
+            }
+            
+            return result.data
+        } catch {
+            if let error = error as NSError?, error.domain == NSURLErrorDomain {
+                if error.code == NSURLErrorNotConnectedToInternet {
+                    throw HTTPError.noInternet
+                } else if error.code == NSURLErrorTimedOut {
+                    throw HTTPError.timeout
+                }
+            }
+            throw HTTPError.clientError
+        }
+    }
+}
+
+extension HTTPClient {
+    internal func getName() -> String {
+        return String(describing: self)
+    }
+    
+    internal func makeRequestUnderiOS15(request: URLRequest) async throws -> (Data?, URLResponse?) {
+        return try await withCheckedThrowingContinuation({ continuation in
+            let dataTask = session.dataTask(with: request) { data, response, error in
+                guard let error = error else {
+                    continuation.resume(returning: (data, response))
+                    return
+                }
+                continuation.resume(throwing: error)
+            }
+            
+            dataTask.resume()
+        })
+    }
+    
+    @available(iOS 15.0, *)
+    internal func makeRequest(request: URLRequest) async throws -> (Data?, URLResponse?) {
+        return try await session.data(for: request)
+    }
+}

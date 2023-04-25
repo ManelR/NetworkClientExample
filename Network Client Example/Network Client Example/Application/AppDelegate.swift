@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Network Client Example
 //
-//  Created by Manel MeetingLawyers on 21/4/23.
+//  Created by Manel Roca on 21/4/23.
 //
 
 import UIKit
