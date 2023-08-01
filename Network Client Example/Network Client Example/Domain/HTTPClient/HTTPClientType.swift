@@ -7,6 +7,8 @@
 
 import Foundation
 
-protocol HTTPClientType {
+internal protocol HTTPClientType {
     func send(request: URLRequest) async throws -> Data?
+    func sendAndDecode<T: Decodable>(request: URLRequest) async throws -> T?
+    func clearAllCache()
 }
