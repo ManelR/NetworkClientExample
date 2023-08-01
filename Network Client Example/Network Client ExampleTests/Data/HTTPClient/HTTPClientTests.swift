@@ -23,7 +23,9 @@ final class HTTPClientTests: XCTestCase {
         configuration.protocolClasses = [MockURLProtocol.self]
         return URLSession(configuration: configuration)
     }
-    
+
+    // MARK: - send
+
     // MARK: Success
     func test_Send_Request_200_Assert_Data_Is_Equal() async {
         // Given
@@ -151,6 +153,10 @@ final class HTTPClientTests: XCTestCase {
     func test_Send_Request_409_Assert_Throws_Confict_Error() async {
         await self.checkHTTPStatusCodeError(statusCode: 409, error: .conflict)
     }
+
+    func test_Send_Request_418_Assert_Throws_Confict_Error() async {
+        await self.checkHTTPStatusCodeError(statusCode: 418, error: .serverError)
+    }
     
     // MARK: Client Errors
     func test_Send_Request_No_Internet_Throws_NoInternet_Error() async {
@@ -168,7 +174,7 @@ final class HTTPClientTests: XCTestCase {
             XCTFail("This request must fail")
         } catch {
             // Then
-            XCTAssertEqual(error as! HTTPError, HTTPError.noInternet)
+            XCTAssertEqual(error as! HTTPError, .noInternet)
         }
     }
     
@@ -187,7 +193,102 @@ final class HTTPClientTests: XCTestCase {
             XCTFail("This request must fail")
         } catch {
             // Then
-            XCTAssertEqual(error as! HTTPError, HTTPError.timeout)
+            XCTAssertEqual(error as! HTTPError, .timeout)
+        }
+    }
+
+    func test_Send_Request_BadURL_Throws_Client_Error() async {
+        // Given
+        let url = URL(string: "https://mroca.me/test")!
+
+        MockURLProtocol.error = NSError(domain: NSURLErrorDomain,
+                                        code: NSURLErrorBadURL)
+        MockURLProtocol.requestHandler = nil
+
+        // When
+        let urlRequest = URLRequest(url: url)
+        do {
+            _ = try await self.sut.send(request: urlRequest)
+            XCTFail("This request must fail")
+        } catch {
+            // Then
+            XCTAssertEqual(error as! HTTPError, .clientError)
+        }
+    }
+
+    // MARK: - sendAndDecode
+
+    func test_SendAndDecode_Request_200_Assert_Data_Is_Decoded() async {
+        // Given
+        let json =
+                  """
+                  {
+                     "name" : "Manel",
+                     "age" : 28
+                  }
+                  """
+        let data = json.data(using: .utf8)!
+        let url = URL(string: "https://mroca.me/test")!
+
+        MockURLProtocol.error = nil
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: url,
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: ["Content-Type": "application/json"])!
+            return (response, data)
+        }
+
+        struct ExampleResponse: Decodable {
+            var name: String
+            var age: Int
+        }
+
+        // When
+        let urlRequest = URLRequest(url: url)
+        do {
+            let result: ExampleResponse? = try await self.sut.sendAndDecode(request: urlRequest)
+            // Then
+            XCTAssertEqual(result!.name, "Manel")
+            XCTAssertEqual(result!.age, 28)
+        } catch {
+            XCTFail("This request should not fail")
+        }
+    }
+
+    func test_SendAndDecode_Request_200_Assert_Method_Throws_JSON_Error() async {
+        // Given
+        let json =
+                  """
+                  {
+                     "name1" : "Manel",
+                     "age" : 28
+                  }
+                  """
+        let data = json.data(using: .utf8)!
+        let url = URL(string: "https://mroca.me/test")!
+
+        MockURLProtocol.error = nil
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: url,
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: ["Content-Type": "application/json"])!
+            return (response, data)
+        }
+
+        struct ExampleResponse: Decodable {
+            var name: String
+            var age: Int
+        }
+
+        // When
+        let urlRequest = URLRequest(url: url)
+        do {
+            let _: ExampleResponse? = try await self.sut.sendAndDecode(request: urlRequest)
+        } catch {
+            // Then
+            XCTAssertEqual(error as! HTTPError, .JSONParseError)
         }
     }
 }

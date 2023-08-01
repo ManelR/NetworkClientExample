@@ -18,19 +18,10 @@
 		8AD5E2BF29F2D78E007687B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD5E2BD29F2D78E007687B8 /* Main.storyboard */; };
 		8AD5E2C129F2D78F007687B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AD5E2C029F2D78F007687B8 /* Assets.xcassets */; };
 		8AD5E2C429F2D78F007687B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD5E2C229F2D78F007687B8 /* LaunchScreen.storyboard */; };
-		8AD5E2D929F2D78F007687B8 /* Network_Client_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5E2D829F2D78F007687B8 /* Network_Client_ExampleUITests.swift */; };
-		8AD5E2DB29F2D78F007687B8 /* Network_Client_ExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5E2DA29F2D78F007687B8 /* Network_Client_ExampleUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		8AD5E2CB29F2D78F007687B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8AD5E2AC29F2D78E007687B8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8AD5E2B329F2D78E007687B8;
-			remoteInfo = "Network Client Example";
-		};
-		8AD5E2D529F2D78F007687B8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8AD5E2AC29F2D78E007687B8 /* Project object */;
 			proxyType = 1;
@@ -54,9 +45,6 @@
 		8AD5E2C329F2D78F007687B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8AD5E2C529F2D78F007687B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AD5E2CA29F2D78F007687B8 /* Network Client ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network Client ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AD5E2D429F2D78F007687B8 /* Network Client ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network Client ExampleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AD5E2D829F2D78F007687B8 /* Network_Client_ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network_Client_ExampleUITests.swift; sourceTree = "<group>"; };
-		8AD5E2DA29F2D78F007687B8 /* Network_Client_ExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network_Client_ExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,13 +56,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8AD5E2C729F2D78F007687B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8AD5E2D129F2D78F007687B8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -167,7 +148,6 @@
 			children = (
 				8AD5E2B629F2D78E007687B8 /* Network Client Example */,
 				8AD5E2CD29F2D78F007687B8 /* Network Client ExampleTests */,
-				8AD5E2D729F2D78F007687B8 /* Network Client ExampleUITests */,
 				8AD5E2B529F2D78E007687B8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -177,7 +157,6 @@
 			children = (
 				8AD5E2B429F2D78E007687B8 /* Network Client Example.app */,
 				8AD5E2CA29F2D78F007687B8 /* Network Client ExampleTests.xctest */,
-				8AD5E2D429F2D78F007687B8 /* Network Client ExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,15 +179,6 @@
 				8A77A86029F8034900D5BC64 /* Data */,
 			);
 			path = "Network Client ExampleTests";
-			sourceTree = "<group>";
-		};
-		8AD5E2D729F2D78F007687B8 /* Network Client ExampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8AD5E2D829F2D78F007687B8 /* Network_Client_ExampleUITests.swift */,
-				8AD5E2DA29F2D78F007687B8 /* Network_Client_ExampleUITestsLaunchTests.swift */,
-			);
-			path = "Network Client ExampleUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,24 +219,6 @@
 			productReference = 8AD5E2CA29F2D78F007687B8 /* Network Client ExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8AD5E2D329F2D78F007687B8 /* Network Client ExampleUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8AD5E2E429F2D78F007687B8 /* Build configuration list for PBXNativeTarget "Network Client ExampleUITests" */;
-			buildPhases = (
-				8AD5E2D029F2D78F007687B8 /* Sources */,
-				8AD5E2D129F2D78F007687B8 /* Frameworks */,
-				8AD5E2D229F2D78F007687B8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8AD5E2D629F2D78F007687B8 /* PBXTargetDependency */,
-			);
-			name = "Network Client ExampleUITests";
-			productName = "Network Client ExampleUITests";
-			productReference = 8AD5E2D429F2D78F007687B8 /* Network Client ExampleUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -281,10 +233,6 @@
 						CreatedOnToolsVersion = 14.0;
 					};
 					8AD5E2C929F2D78F007687B8 = {
-						CreatedOnToolsVersion = 14.0;
-						TestTargetID = 8AD5E2B329F2D78E007687B8;
-					};
-					8AD5E2D329F2D78F007687B8 = {
 						CreatedOnToolsVersion = 14.0;
 						TestTargetID = 8AD5E2B329F2D78E007687B8;
 					};
@@ -305,7 +253,6 @@
 			targets = (
 				8AD5E2B329F2D78E007687B8 /* Network Client Example */,
 				8AD5E2C929F2D78F007687B8 /* Network Client ExampleTests */,
-				8AD5E2D329F2D78F007687B8 /* Network Client ExampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -322,13 +269,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8AD5E2C829F2D78F007687B8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8AD5E2D229F2D78F007687B8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -360,15 +300,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8AD5E2D029F2D78F007687B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8AD5E2D929F2D78F007687B8 /* Network_Client_ExampleUITests.swift in Sources */,
-				8AD5E2DB29F2D78F007687B8 /* Network_Client_ExampleUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -376,11 +307,6 @@
 			isa = PBXTargetDependency;
 			target = 8AD5E2B329F2D78E007687B8 /* Network Client Example */;
 			targetProxy = 8AD5E2CB29F2D78F007687B8 /* PBXContainerItemProxy */;
-		};
-		8AD5E2D629F2D78F007687B8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8AD5E2B329F2D78E007687B8 /* Network Client Example */;
-			targetProxy = 8AD5E2D529F2D78F007687B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -612,40 +538,6 @@
 			};
 			name = Release;
 		};
-		8AD5E2E529F2D78F007687B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mroca.network.Network-Client-ExampleUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Network Client Example";
-			};
-			name = Debug;
-		};
-		8AD5E2E629F2D78F007687B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mroca.network.Network-Client-ExampleUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Network Client Example";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -672,15 +564,6 @@
 			buildConfigurations = (
 				8AD5E2E229F2D78F007687B8 /* Debug */,
 				8AD5E2E329F2D78F007687B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8AD5E2E429F2D78F007687B8 /* Build configuration list for PBXNativeTarget "Network Client ExampleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8AD5E2E529F2D78F007687B8 /* Debug */,
-				8AD5E2E629F2D78F007687B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
